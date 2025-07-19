@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreaCoders - Pack Premium de Cursos de Programación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --text-color: #2b2d42;
+            --bg-color: #f8f9fa;
+            --card-color: #ffffff;
+            --highlight-color: #edf2f4;
+            --footer-color: #8d99ae;
+            --price-color: #2ecc71;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .dark-mode {
+            --primary-color: #4cc9f0;
+            --secondary-color: #4361ee;
+            --accent-color: #f72585;
+            --text-color: #edf2f4;
+            --bg-color: #1a1a2e;
+            --card-color: #16213e;
+            --highlight-color: #0f3460;
+            --footer-color: #8d99ae;
+            --price-color: #4cc9f0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            text-align: center;
+            transition: var(--transition);
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px 15px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--accent-color);
+            font-size: 28px;
+        }
+
+        .dark-mode-toggle {
+            background: var(--card-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .card {
+            background: var(--card-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            color: var(--footer-color);
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .highlight {
+            background-color: var(--highlight-color);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 4px solid var(--accent-color);
+            text-align: left;
+        }
+
+        .highlight p {
+            margin: 12px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .highlight p::before {
+            content: '✓';
+            color: var(--price-color);
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .price-container {
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .price {
+            margin-top: 10px;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--price-color);
+            display: inline-block;
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            background: var(--accent-color);
+            color: white;
+            padding: 4px 15px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            margin: 20px auto;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(18, 140, 126, 0.4);
+        }
+
+        .whatsapp-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        /* Estilos para el carrusel de comprobantes */
+        .testimonials-section {
+            margin: 30px 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+            padding: 10px 0;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        .proof-card {
+            background: var(--card-color);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .proof-image-container {
+            position: relative;
+            width: 100%; /* Ajustar según el ancho de la imagen */
+            padding-top: 50%; /* Proporción 2:1 (ajustar según necesidad) */
+            overflow: hidden;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .proof-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .proof-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--footer-color);
+            margin: 0 5px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: var(--transition);
+        }
+
+        .carousel-dot.active {
+            background: var(--primary-color);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        /* Métodos de pago */
+        .payment-methods {
+            margin: 30px 0;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            font-size: 22px;
+            color: var(--primary-color);
+        }
+
+        .payment-icon img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        footer {
+            margin-top: 40px;
+            color: var(--footer-color);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Estilos para desktop */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .subtitle {
+                font-size: 18px;
+            }
+            
+            .carousel-item {
+                min-width: 50%;
+            }
+            
+            .proof-image-container {
+                padding-top: 35%; /* Ajuste de proporción para desktop */
+            }
+            
+            .whatsapp-float {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-code logo-icon"></i>
+                <span>CreaCoders</span>
+            </div>
+            <button class="dark-mode-toggle" id="darkModeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+        <div class="card">
+            <h1>Pack Premium de Cursos de Programación</h1>
+            <p class="subtitle">Domina las tecnologías más demandadas por solo $15,000 PESOS</p>
+            
+            <div class="highlight">
+                <p>✅ Acceso inmediato a +60 cursos premium valorados en $1,000,000+ PESOS</p>
+                <p>✅ Actualizaciones semanales con nuevos cursos</p>
+                <p>✅ Acceso vitalicio sin mensualidades</p>
+                <p>✅ Soporte directo por WhatsApp</p>
+                <p>✅ Certificados de finalización</p>
+            </div>
+            
+            <div class="price-container">
+                <div class="price-badge">¡OFERTA LIMITADA!</div>
+                <div class="price">$15,000 PESOS</div>
+            </div>
+            
+            <a href="https://wa.me/573026656161?text=Quiero%20obtener%20el%20pack%20de%20cursos" class="whatsapp-btn">
+                <i class="fab fa-whatsapp whatsapp-icon"></i> ¡Quiero mi acceso ahora!
+            </a>
+        </div>
+
+        <!-- Sección de comprobantes de pago -->
+        <div class="card">
+            <div class="testimonials-section">
+                <h2 class="section-title">
+                    <i class="fas fa-receipt"></i> Comprobantes Reales de Clientes
+                </h2>
+                
+                <div class="carousel-container">
+                    <div class="carousel" id="proofCarousel">
+                        <!-- Comprobante 1 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap1.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap1.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 2 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap2.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap2.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 3 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap3.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap3.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 4 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap4.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap4.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 5 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap5.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap5.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 6 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap6.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap6.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 7 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap7.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap7.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 8 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap8.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap8.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Comprobante 9 -->
+                        <div class="carousel-item">
+                            <div class="proof-card">
+                                <a href="cap9.jpg" data-lightbox="proofs" data-title="Pago recibido - $15,000 PESOS">
+                                    <div class="proof-image-container">
+                                        <img src="cap9.jpg" alt="Comprobante de pago CreaCoders" class="proof-image">
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-nav" id="carouselDots"></div>
+                </div>
+            </div>
+        </div>
+
+       
+        <!-- Sección de categorías -->
+        <div class="card">
+            <div class="features">
+                <h2 class="section-title">
+                    <i class="fas fa-laptop-code"></i> Categorías Incluidas
+                </h2>
+                
+                <div class="feature-item">
+                    <i class="fas fa-laptop-code feature-icon"></i>
+                    <span><strong>Frontend Profesional</strong> - HTML, CSS, JavaScript, React, Angular</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-server feature-icon"></i>
+                    <span><strong>Backend Avanzado</strong> - Node.js, Python, PHP, Laravel</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-database feature-icon"></i>
+                    <span><strong>Bases de Datos</strong> - SQL, MySQL, MongoDB</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt feature-icon"></i>
+                    <span><strong>Apps Móviles</strong> - React Native, Flutter</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-brain feature-icon"></i>
+                    <span><strong>Data Science & AI</strong> - Python, Machine Learning</span>
+                </div>
+            </div>
+            
+            <a href="https://wa.me/573026656161?text=Quiero%20obtener%20el%20pack%20de%20cursos" class="whatsapp-btn">
+                <i class="fab fa-whatsapp whatsapp-icon"></i> ¡No quiero perderme esta oferta!
+            </a>
+        </div>
+        
+        <footer>
+            © 2025 <strong>CreaCoders</strong> - Todos los derechos reservados<br>
+            <small>Transformando aspirantes en profesionales desde 2024</small>
+        </footer>
+    </div>
+
+    <!-- Botón flotante de WhatsApp (visible solo en mobile) -->
+    <a href="https://wa.me/573026656161?text=Quiero%20obtener%20el%20pack%20de%20cursos" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script>
+        // Modo oscuro
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+        
+        // Verificar preferencia del usuario
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+
+        // Carrusel de comprobantes
+        const carousel = document.getElementById('proofCarousel');
+        const dotsContainer = document.getElementById('carouselDots');
+        const items = document.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+        const itemCount = items.length;
+
+        // Crear puntos de navegación
+        items.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        // Función para ir a un slide específico
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        // Actualizar el carrusel
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            carousel.style.transform = `translateX(${offset}%)`;
+            
+            // Actualizar puntos activos
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Auto-avance del carrusel
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % itemCount;
+            updateCarousel();
+        }, 5000);
+
+        // Configurar lightbox
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'showImageNumberLabel': false,
+            'positionFromTop': 50,
+            'alwaysShowNavOnTouchDevices': true
+        });
+    </script>
+</body>
+</html>
