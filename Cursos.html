@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreaCoders - Catálogo Completo de Cursos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --text-color: #2b2d42;
+            --bg-color: #f8f9fa;
+            --card-color: #ffffff;
+            --highlight-color: #edf2f4;
+            --footer-color: #8d99ae;
+            --price-color: #2ecc71;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .dark-mode {
+            --primary-color: #4cc9f0;
+            --secondary-color: #4361ee;
+            --accent-color: #f72585;
+            --text-color: #edf2f4;
+            --bg-color: #1a1a2e;
+            --card-color: #16213e;
+            --highlight-color: #0f3460;
+            --footer-color: #8d99ae;
+            --price-color: #4cc9f0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            text-align: center;
+            transition: var(--transition);
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px 15px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--accent-color);
+            font-size: 28px;
+        }
+
+        .dark-mode-toggle {
+            background: var(--card-color);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .card {
+            background: var(--card-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin: 25px 0 15px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        h3 i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+
+        .course-category {
+            margin-bottom: 30px;
+        }
+
+        .course-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .course-item {
+            background: var(--highlight-color);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .course-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .course-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .course-title .new-badge {
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+
+        .course-description {
+            font-size: 14px;
+            color: var(--footer-color);
+            margin-top: 5px;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            margin: 20px auto;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(18, 140, 126, 0.4);
+        }
+
+        .whatsapp-icon {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        /* Botón flotante de WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        footer {
+            margin-top: 40px;
+            color: var(--footer-color);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* Estilos para desktop */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 36px;
+            }
+            
+            .course-list {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .whatsapp-float {
+                display: none;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1000px;
+            }
+            
+            .course-list {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-code logo-icon"></i>
+                <span>CreaCoders</span>
+            </div>
+            <button class="dark-mode-toggle" id="darkModeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+        <div class="card">
+            <h1>Catálogo Completo de Cursos</h1>
+            <p>Accede a todos estos cursos y más por solo <strong>$15,000 PESOS</strong> con nuestro Pack Premium</p>
+            
+            <a href="https://wa.me/573026656161?text=Quiero%20obtener%20el%20pack%20de%20cursos" class="whatsapp-btn">
+                <i class="fab fa-whatsapp whatsapp-icon"></i> ¡Quiero el Pack Premium!
+            </a>
+        </div>
+
+        <!-- Categoría Frontend -->
+        <div class="card course-category">
+            <h2><i class="fas fa-laptop-code"></i> Frontend Development</h2>
+            <p>Domina el desarrollo de interfaces web modernas, adaptables y profesionales con las tecnologías más demandadas.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">
+                        <span>HTML - Creación de páginas web</span>
+                        <span class="new-badge">Nuevo</span>
+                    </div>
+                    <div class="course-description">
+                        Aprende los fundamentos de HTML5 para crear estructuras web semánticas y accesibles.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">
+                        <span>JavaScript Básico</span>
+                        <span class="new-badge">Nuevo</span>
+                    </div>
+                    <div class="course-description">
+                        Introducción a la programación con JavaScript: variables, funciones, condicionales y bucles.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de JavaScript</div>
+                    <div class="course-description">
+                        Domina JavaScript desde cero hasta nivel avanzado con proyectos prácticos.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Manipulación del DOM</div>
+                    <div class="course-description">
+                        Aprende a interactuar dinámicamente con los elementos de tu página web.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Responsive Design</div>
+                    <div class="course-description">
+                        Diseña sitios web que se adapten perfectamente a cualquier dispositivo.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Preprocesadores CSS</div>
+                    <div class="course-description">
+                        Domina SASS y LESS para escribir CSS más eficiente y mantenible.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Optimización Web</div>
+                    <div class="course-description">
+                        Técnicas avanzadas para mejorar el rendimiento y velocidad de carga de tus sitios.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso Práctico de Maquetación en CSS</div>
+                    <div class="course-description">
+                        Domina Flexbox, Grid y técnicas modernas de maquetación web.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso Frontend Completo</div>
+                    <div class="course-description">
+                        Ruta completa para convertirte en desarrollador frontend profesional.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Web Components con JavaScript</div>
+                    <div class="course-description">
+                        Crea componentes reutilizables con la API nativa de Web Components.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de TypeScript</div>
+                    <div class="course-description">
+                        JavaScript tipado para aplicaciones más robustas y mantenibles.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Svelte</div>
+                    <div class="course-description">
+                        El framework revolucionario que compila a JavaScript vanilla.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de React.js</div>
+                    <div class="course-description">
+                        Aprende la biblioteca más popular para construir interfaces de usuario.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Angular</div>
+                    <div class="course-description">
+                        Framework completo para aplicaciones empresariales escalables.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Angular - Pruebas Unitarias con Jest</div>
+                    <div class="course-description">
+                        Aprende a escribir pruebas robustas para tus aplicaciones Angular.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso Diseño Web en WordPress</div>
+                    <div class="course-description">
+                        Crea sitios web profesionales sin necesidad de programar.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Crear una Página Web con WordPress y Elementor PRO</div>
+                    <div class="course-description">
+                        Domina el constructor visual más popular para WordPress.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Astro Framework</div>
+                    <div class="course-description">
+                        El framework moderno para construir sitios estáticos rápidos.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Diseño Responsivo, Grid, HTML & CSS</div>
+                    <div class="course-description">
+                        Masterclass de diseño web adaptable con las técnicas más modernas.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Backend -->
+        <div class="card course-category">
+            <h2><i class="fas fa-server"></i> Backend Development</h2>
+            <p>Construye servidores, bases de datos y lógica backend robusta para cualquier aplicación.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">Todo PHP y MySQL, de Básico a Experto</div>
+                    <div class="course-description">
+                        Domina el lenguaje de backend más utilizado en la web junto con bases de datos relacionales.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">API REST con PHP y MySQL</div>
+                    <div class="course-description">
+                        Aprende a construir APIs modernas con autenticación JWT y buenas prácticas.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de NodeJS y Fundamentos</div>
+                    <span class="new-badge">Nuevo</span>
+                    <div class="course-description">
+                        JavaScript en el servidor con el runtime más popular del momento.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de C# y .NET Core</div>
+                    <div class="course-description">
+                        Desarrollo backend robusto con el framework empresarial de Microsoft.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Aprende Lenguaje C</div>
+                    <div class="course-description">
+                        Fundamentos de programación con el lenguaje que dio origen a muchos otros.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Laravel desde cero</div>
+                    <div class="course-description">
+                        El framework PHP más elegante y productivo para desarrollo web.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Sistema de Pedidos con Laravel 11</div>
+                    <div class="course-description">
+                        Proyecto práctico para implementar un sistema completo de pedidos.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Desarrollo en Python Avanzado</div>
+                    <div class="course-description">
+                        Domina Python para backend, automatización y análisis de datos.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Full Stack -->
+        <div class="card course-category">
+            <h2><i class="fas fa-layer-group"></i> Full Stack & Frameworks</h2>
+            <p>Integra frontend y backend para crear sistemas web completos y profesionales.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">Full Stack con Laravel & VueJS</div>
+                    <div class="course-description">
+                        Combina el poder de Laravel en backend con Vue.js en frontend.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Inicia con TALL Stack</div>
+                    <div class="course-description">
+                        Laravel con Tailwind CSS, Alpine.js y Livewire para desarrollo fullstack moderno.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Tienda Online con React</div>
+                    <div class="course-description">
+                        Proyecto completo de e-commerce con carrito de compras y pasarela de pagos.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso profesional de Angular</div>
+                    <div class="course-description">
+                        Desarrollo fullstack con Angular en frontend y Node.js en backend.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Ruby on Rails</div>
+                    <div class="course-description">
+                        El framework que revolucionó la productividad en desarrollo web.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Bases de Datos -->
+        <div class="card course-category">
+            <h2><i class="fas fa-database"></i> Bases de Datos y SQL</h2>
+            <p>Aprende a estructurar, consultar y administrar bases de datos como un experto.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">SQL para Principiantes</div>
+                    <div class="course-description">
+                        Fundamentos del lenguaje estándar para gestionar bases de datos relacionales.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Aprende SQL desde Cero</div>
+                    <div class="course-description">
+                        Desde consultas básicas hasta procedimientos almacenados avanzados.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Power BI desde Cero</div>
+                    <span class="new-badge">Nuevo</span>
+                    <div class="course-description">
+                        Crea dashboards y reportes profesionales con la herramienta de Microsoft.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Diseño -->
+        <div class="card course-category">
+            <h2><i class="fas fa-paint-brush"></i> Diseño Web, UX/UI & WordPress</h2>
+            <p>Aprende a diseñar interfaces atractivas, intuitivas y funcionales.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">Curso Diseño UX/UI desde Cero</div>
+                    <div class="course-description">
+                        Principios de experiencia de usuario e interfaz para desarrolladores.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Diseño Web en WordPress</div>
+                    <div class="course-description">
+                        Crea sitios profesionales con el CMS más popular del mundo.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Elementor PRO 2024</div>
+                    <div class="course-description">
+                        Domina el constructor visual más avanzado para WordPress.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Sistemas de diseño (Básico)</div>
+                    <div class="course-description">
+                        Crea sistemas consistentes y escalables para tus proyectos.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Programación General -->
+        <div class="card course-category">
+            <h2><i class="fas fa-code"></i> Programación General</h2>
+            <p>Desarrolla tu lógica, fundamentos y buenas prácticas como programador.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">Fundamentos de Programación</div>
+                    <div class="course-description">
+                        Bases esenciales para comenzar en el mundo del desarrollo.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Git & GitHub</div>
+                    <div class="course-description">
+                        Control de versiones y trabajo colaborativo para desarrolladores.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Kotlin para Android</div>
+                    <div class="course-description">
+                        El lenguaje moderno para desarrollo de aplicaciones móviles.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Lenguaje C</div>
+                    <div class="course-description">
+                        El lenguaje que sentó las bases de la programación moderna.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Curso de Bootstrap</div>
+                    <div class="course-description">
+                        El framework CSS más popular para desarrollo rápido de interfaces.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Data Science -->
+        <div class="card course-category">
+            <h2><i class="fas fa-brain"></i> Data Science & IA</h2>
+            <p>Iníciate en el mundo de la ciencia de datos, redes neuronales e inteligencia artificial.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">MasterClass Python</div>
+                    <span class="new-badge">Nuevo</span>
+                    <div class="course-description">
+                        El lenguaje más versátil para ciencia de datos y automatización.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Machine Learning y Deep Learning</div>
+                    <div class="course-description">
+                        Introducción práctica a los algoritmos de aprendizaje automático.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Python para Ciencia de Datos</div>
+                    <div class="course-description">
+                        Pandas, NumPy y Matplotlib para análisis y visualización de datos.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Inteligencia Artificial</div>
+                    <div class="course-description">
+                        Fundamentos teóricos y prácticos de IA con Python.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Apps Móviles -->
+        <div class="card course-category">
+            <h2><i class="fas fa-mobile-alt"></i> Apps Móviles</h2>
+            <p>Aprende a crear aplicaciones móviles multiplataforma modernas.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">Dart para Flutter</div>
+                    <div class="course-description">
+                        Domina el lenguaje Dart para desarrollar con el framework Flutter.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Kotlin para Android</div>
+                    <div class="course-description">
+                        Desarrollo nativo de aplicaciones Android con el lenguaje oficial.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Herramientas -->
+        <div class="card course-category">
+            <h2><i class="fas fa-tools"></i> Herramientas & Testing</h2>
+            <p>Domina herramientas clave para desarrollo, testing y automatización.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">Postman</div>
+                    <div class="course-description">
+                        Prueba y documenta tus APIs REST como un profesional.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Testing con Jest y Angular</div>
+                    <div class="course-description">
+                        Pruebas unitarias y de integración para aplicaciones Angular.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Router SPA con JavaScript</div>
+                    <div class="course-description">
+                        Implementa rutas en aplicaciones de una sola página sin frameworks.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">Automatización Telegram con Laravel</div>
+                    <div class="course-description">
+                        Crea bots y automatiza procesos con la API de Telegram.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoría Otros -->
+        <div class="card course-category">
+            <h2><i class="fas fa-book-open"></i> Cursos Introductorios</h2>
+            <p>Cursos básicos para comenzar desde cero con bases sólidas.</p>
+            
+            <div class="course-list">
+                <div class="course-item">
+                    <div class="course-title">React Pro Intermedio</div>
+                    <div class="course-description">
+                        Patrones avanzados y mejores prácticas en desarrollo con React.
+                    </div>
+                </div>
+                
+                <div class="course-item">
+                    <div class="course-title">JavaScript Básico</div>
+                    <div class="course-description">
+                        Primeros pasos en el lenguaje más importante de la web.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Llamado a la acción -->
+        <div class="card">
+            <h2><i class="fas fa-gem"></i> Accede a todos estos cursos y más</h2>
+            <p>Por solo <strong>$15,000 PESOS</strong> obtienes acceso vitalicio a todos estos cursos y futuras actualizaciones.</p>
+            
+            <a href="https://wa.me/573026656161?text=Quiero%20obtener%20el%20pack%20de%20cursos" class="whatsapp-btn">
+                <i class="fab fa-whatsapp whatsapp-icon"></i> ¡Quiero el Pack Premium!
+            </a>
+        </div>
+        
+        <footer>
+            © 2025 <strong>CreaCoders</strong> - Todos los derechos reservados<br>
+            <small>Transformando aspirantes en profesionales desde 2024</small>
+        </footer>
+    </div>
+
+    <!-- Botón flotante de WhatsApp (visible solo en mobile) -->
+    <a href="https://wa.me/573026656161?text=Quiero%20obtener%20el%20pack%20de%20cursos" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Modo oscuro
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+        
+        // Verificar preferencia del usuario
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        });
+    </script>
+</body>
+</html>
